@@ -3,8 +3,10 @@ package com.giwook.study.functional.stream;
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -31,13 +33,11 @@ public class JavaStream {
 	}
 
 	public List<String> filterByStartWith(List<String> stringList, Predicate<String> predicate) {
-		List<String> result = Lists.newArrayList();
-		for (String s : stringList) {
-			if (predicate.test(s)) {
-				result.add(s);
-			}
-		}
-		return result;
+		return stringList.stream().filter(predicate).collect(Collectors.toList());
+	}
+
+	public <T> Collection<T> filter(Collection<T> collection, Predicate<T> predicate) {
+		return collection.stream().filter(predicate).collect(Collectors.toList());
 	}
 
 }

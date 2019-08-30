@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collection;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,6 +38,11 @@ class JavaStreamTest {
 		assertThat(startWithBList).isNotNull();
 		assertThat(startWithBList).size().isEqualTo(3);
 
+		Collection<String> startWithACollection = javaStream.filter(stringList, JavaStream::startWithA);
+		assertThat(startWithACollection).isNotNull();
+		assertThat(startWithACollection).size().isEqualTo(2);
+
+
 	}
 
 	@DisplayName("Predicate startWith with lambda")
@@ -58,6 +64,10 @@ class JavaStreamTest {
 		List<String> startWithBList = javaStream.filterByStartWith(stringList, s -> s.startsWith("B"));
 		assertThat(startWithBList).isNotNull();
 		assertThat(startWithBList).size().isEqualTo(3);
+
+		Collection<String> startWithACollection = javaStream.filter(stringList, s -> s.startsWith("A"));
+		assertThat(startWithACollection).isNotNull();
+		assertThat(startWithACollection).size().isEqualTo(2);
 
 	}
 
