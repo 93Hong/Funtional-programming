@@ -22,6 +22,14 @@ public class JavaStream {
 
 		List<String> stringList1 = filterByStartWith(stringList, JavaStream::startWithA);
 
+		final long count = stringList.stream().filter(s -> {
+			return stringList1.contains(s);
+		}).count();
+
+		int primitive = 3;
+		final long count1 = stringList.stream().filter(s -> s.length() > primitive).count();
+
+
 	}
 
 	public static boolean startWithB(String s) {

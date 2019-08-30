@@ -2,8 +2,10 @@ package com.giwook.study.functional.stream;
 
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -23,6 +25,36 @@ public class Lambda {
 		};
 		Supplier<String> stringSupplier = () -> "string";
 		BiFunction<String, String, String> stringStringStringEntryTransformer = (String s1, String s2) -> s1.concat(s2);
+
+	}
+
+	public void compare() {
+		List<TestObject> testObjectList = Lists.newArrayList();
+
+		// 1. Implement Comparator
+		testObjectList.sort(new TestComparator());
+
+		// 2. Anonymous class
+		testObjectList.sort((new Comparator<TestObject>() {
+			@Override
+			public int compare(TestObject o1, TestObject o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		}));
+
+		// 3. Lambda
+		testObjectList.sort(((o1, o2) -> o1.getName().compareTo(o2.getName())));
+
+		// 4. Method reference
+		testObjectList.sort((Comparator.comparing(TestObject::getName)));
+	}
+
+	// 코드 전달
+	public static class TestComparator implements Comparator<TestObject> {
+		@Override
+		public int compare(TestObject o1, TestObject o2) {
+			return o1.getName().compareTo(o2.getName());
+		}
 	}
 
 }
