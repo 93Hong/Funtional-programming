@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  *
@@ -47,6 +48,11 @@ public class Lambda {
 
 		// 4. Method reference
 		testObjectList.sort((Comparator.comparing(TestObject::getName)));
+
+		Stream<String> stringStream = testObjectList.stream().map(testObject -> testObject.getName());
+
+		Stream<String> stringStream1 = stringStream.filter(s -> s.length() > 3);
+		Stream<String> stringStream2 = stringStream.filter(s -> s.length() > 4);
 	}
 
 	// 코드 전달
