@@ -30,7 +30,7 @@ public class PrimitiveStreamTest {
 		// Operate with integerStream
 		Stream<Integer> integerStream = testObjectList.stream()
 			.map(TestObject::getAge);
-		Integer sumWithStream = integerStream
+		int sumWithStream = integerStream
 			.reduce(0, Integer::sum);
 
 		// Operate with intStream
@@ -41,6 +41,9 @@ public class PrimitiveStreamTest {
 
 		assertThat(sumWithStream).isEqualTo(sumWithPrimitiveStream);
 
+		final Stream<Integer> boxed = intStream.boxed();
+		final IntStream intStream1 = integerStream.mapToInt(Integer::intValue);
 	}
 
 }
+

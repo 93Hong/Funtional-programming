@@ -22,6 +22,7 @@ class JavaStreamTest {
 	@Test
 	void test_filterByStartWith() {
 
+
 		List<String> stringList = Lists.newArrayList();
 		stringList.add("Aaa");
 		stringList.add("Aaa");

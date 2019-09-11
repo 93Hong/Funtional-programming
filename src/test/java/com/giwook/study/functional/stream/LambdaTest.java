@@ -5,12 +5,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Spliterator;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  *
@@ -18,6 +19,10 @@ import java.util.stream.Stream;
  *
  */
 class LambdaTest {
+
+	private static boolean test(String s) {
+		return s.length() > 3;
+	}
 
 	@DisplayName("A stream should be operated on (invoking an intermediate or terminal stream operation) only once.")
 	@Test
@@ -31,9 +36,9 @@ class LambdaTest {
 
 		final long count = stringStream.filter(s -> s.length() > 3).count();
 
-		Assertions.assertThrows(IllegalStateException.class, () -> {
-			long count2 = stringStream.filter(s -> s.length() > 4).count();
-		});
+		assertThatThrownBy(() -> {
+			long count1 = stringStream.filter(s -> s.length() > 4).count();
+		}).isInstanceOf(IllegalStateException.class);
 
 		Stream<Integer> test = testObjectList
 			.stream()
@@ -47,17 +52,6 @@ class LambdaTest {
 
 		test1.forEach(System.out::println);
 		test1.close();
-
-		Iterator<Integer> iterator = test.iterator();
-		Spliterator<Integer> spliterator = test.spliterator();
-
-		Stream<TestObject> testObjectStream = testObjectList.parallelStream();
-		Stream<TestObject> sequential = testObjectStream.sequential();
-
-		Integer reduce = testObjectList
-			.stream()
-			.map(TestObject::getAge)
-			.reduce(0, Integer::sum);
 	}
 
 }
