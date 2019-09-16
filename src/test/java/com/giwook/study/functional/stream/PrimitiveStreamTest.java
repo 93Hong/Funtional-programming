@@ -41,8 +41,9 @@ public class PrimitiveStreamTest {
 
 		assertThat(sumWithStream).isEqualTo(sumWithPrimitiveStream);
 
+		// intStream <-> Stream<Integer>
 		final Stream<Integer> boxed = intStream.boxed();
-		final IntStream intStream1 = integerStream.mapToInt(Integer::intValue);
+		final IntStream unboxed = integerStream.mapToInt(Integer::intValue);
 	}
 
 }

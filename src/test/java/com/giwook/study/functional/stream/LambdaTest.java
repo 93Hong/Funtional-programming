@@ -34,10 +34,10 @@ class LambdaTest {
 
 		Stream<String> stringStream = testObjectList.stream().map(TestObject::getName);
 
-		final long count = stringStream.filter(s -> s.length() > 3).count();
+		final long consumedOnce = stringStream.filter(s -> s.length() > 3).count();
 
 		assertThatThrownBy(() -> {
-			long count1 = stringStream.filter(s -> s.length() > 4).count();
+			long consumedTwice = stringStream.filter(s -> s.length() > 4).count();
 		}).isInstanceOf(IllegalStateException.class);
 
 		Stream<Integer> test = testObjectList

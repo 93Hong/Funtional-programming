@@ -22,24 +22,25 @@ public class StreamPipelineTest {
 
 		List<TestObject> testObjectList = Lists.newArrayList();
 
-		testObjectList.add(TestObject.builder().name("kim").age(10).build());
+		testObjectList.add(TestObject.builder().name("kim").age(10).build()); // printed
 		testObjectList.add(TestObject.builder().name("hong").age(20).build());
 		testObjectList.add(TestObject.builder().name("lee").age(30).build());
 		testObjectList.add(TestObject.builder().name("park").age(30).build());
+		testObjectList.add(TestObject.builder().name("kim2").age(10).build()); // not printed
 
 		List<String> collect = testObjectList.stream()
 			.filter(testObject -> {
-				log.info("filter {}", testObject.getName());
+				log.info("filter : {}", testObject.getName());
 				return testObject.getAge() > 15;
 			})
 			.map(testObject -> {
-				log.info("map {}", testObject.getName());
+				log.info("map : {}", testObject.getName());
 				return testObject.getName();
 			})
 			.limit(2)
 			.collect(Collectors.toList());
 
-		log.info(collect.toString());
+		log.info("collect : {}", collect.toString());
 	}
 
 }

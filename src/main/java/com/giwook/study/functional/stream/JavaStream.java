@@ -40,12 +40,18 @@ public class JavaStream {
 		return s.startsWith("A");
 	}
 
-	public List<String> filterByStartWith(List<String> stringList, Predicate<String> predicate) {
-		return stringList.stream().filter(predicate).collect(Collectors.toList());
+	List<String> filterByStartWith(List<String> stringList, Predicate<String> predicate) {
+		return stringList.stream() // source
+			.filter(predicate) 	   // intermediate operations
+			.collect(Collectors.toList()) // terminal operation
+			;
 	}
 
 	public <T> Collection<T> filter(Collection<T> collection, Predicate<T> predicate) {
 		return collection.stream().filter(predicate).collect(Collectors.toList());
 	}
+
+
+
 
 }
