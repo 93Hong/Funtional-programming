@@ -66,7 +66,15 @@ public class StreamPracticeTest {
 	@DisplayName("Cambridge의 거래자들 알파벳순으로 정렬")
 	@Test
 	void test_practice3() {
+		List<String> collect = transactionList.stream()
+			.map(Transaction::getTrader)
+			.distinct()
+			.filter(trader -> "Cambridge".equals(trader.getCity()))
+			.sorted(Comparator.comparing(Trader::getName))
+			.map(Trader::getName)
+			.collect(Collectors.toList());
 
+		log.info(collect.toString());
 	}
 
 	@DisplayName("모든 거래자들 알파벳순")
