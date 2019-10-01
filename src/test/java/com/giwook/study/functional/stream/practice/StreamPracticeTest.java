@@ -51,6 +51,54 @@ public class StreamPracticeTest {
 
 	}
 
+	@DisplayName("거래자가 근무하는 모든 도시를 중복 없이 나열")
+	@Test
+	void test_practice2() {
+
+		List<String> collect = transactionList.stream()
+			.map(transaction -> transaction.getTrader().getCity())
+			.distinct()
+			.collect(Collectors.toList());
+
+		log.info(collect.toString());
+	}
+
+	@DisplayName("Cambridge의 거래자들 알파벳순으로 정렬")
+	@Test
+	void test_practice3() {
+
+	}
+
+	@DisplayName("모든 거래자들 알파벳순")
+	@Test
+	void test_practice4() {
+
+	}
+
+	@DisplayName("밀라노에 거래자가 있는가?")
+	@Test
+	void test_practice5() {
+
+	}
+
+	@DisplayName("Cambridge에 거주하는 거래자의 모든 트랜젝션값")
+	@Test
+	void test_practice6() {
+
+	}
+
+	@DisplayName("전체 트랜젝션 중 최댓값")
+	@Test
+	void test_practice7() {
+
+	}
+
+	@DisplayName("전체 트랜젝션 중 최솟값")
+	@Test
+	void test_practice8() {
+
+	}
+
 
 
 }
