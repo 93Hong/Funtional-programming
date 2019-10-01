@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -61,6 +62,12 @@ public class StreamPracticeTest {
 			.collect(Collectors.toList());
 
 		log.info(collect.toString());
+
+		Set<String> collect1 = transactionList.stream()
+			.map(transaction -> transaction.getTrader().getCity())
+			.collect(Collectors.toSet());
+
+		log.info(collect1.toString());
 	}
 
 	@DisplayName("Cambridge의 거래자들 알파벳순으로 정렬")
@@ -80,12 +87,24 @@ public class StreamPracticeTest {
 	@DisplayName("모든 거래자들 알파벳순")
 	@Test
 	void test_practice4() {
+		final String reduce = transactionList.stream()
+			.map(transaction -> transaction.getTrader().getName())
+			.distinct()
+			.sorted()
+			.reduce("", (s1, s2) -> s1 + s2);
 
+		log.info(reduce);
 	}
 
 	@DisplayName("밀라노에 거래자가 있는가?")
 	@Test
 	void test_practice5() {
+
+		final boolean b = transactionList.stream()
+			.map(transaction -> transaction.getTrader().getCity())
+			.anyMatch("Milan"::equals);
+
+		log.info("{}", b);
 
 	}
 
