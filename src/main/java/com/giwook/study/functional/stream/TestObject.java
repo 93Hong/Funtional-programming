@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder @AllArgsConstructor @NoArgsConstructor
 public class TestObject {
+	private TestType type;
 	private String name;
 	private int age;
 }
