@@ -111,19 +111,34 @@ public class StreamPracticeTest {
 	@DisplayName("Cambridge에 거주하는 거래자의 모든 트랜젝션값")
 	@Test
 	void test_practice6() {
+		final List<Integer> collect = transactionList.stream()
+			.filter(transaction -> "Cambridge".equals(transaction.getTrader().getCity()))
+			.map(Transaction::getValue)
+			.collect(Collectors.toList());
 
+		log.info(collect.toString());
 	}
 
 	@DisplayName("전체 트랜젝션 중 최댓값")
 	@Test
 	void test_practice7() {
+		final Integer integer = transactionList.stream()
+			.map(Transaction::getValue)
+			.max(Comparator.comparingInt(Integer::intValue))
+			.orElse(0);
 
+		log.info("{}", integer);
 	}
 
 	@DisplayName("전체 트랜젝션 중 최솟값")
 	@Test
 	void test_practice8() {
+		final Integer integer = transactionList.stream()
+			.map(Transaction::getValue)
+			.min(Comparator.comparingInt(Integer::intValue))
+			.orElse(0);
 
+		log.info("{}", integer);
 	}
 
 
