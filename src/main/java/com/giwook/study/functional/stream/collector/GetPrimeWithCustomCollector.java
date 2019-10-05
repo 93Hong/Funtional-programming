@@ -1,5 +1,7 @@
 package com.giwook.study.functional.stream.collector;
 
+import com.giwook.study.functional.stream.TestObject;
+
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collector;
@@ -49,6 +51,15 @@ public class GetPrimeWithCustomCollector implements Collector<Integer, Map<Boole
 	}
 
 	public boolean isPrime(List<Integer> primes, int candidate) {
+
+		Optional<TestObject> testObject = Optional.empty();
+		final Optional<String> s = testObject.map(TestObject::getName);
+
+		final String s1 = s.orElse("");
+		Optional.empty();
+
+		final Optional<Integer> integer = testObject.flatMap(TestObject::getOptionalInteger);
+
 		int candidateRoot = (int)Math.sqrt(candidate);
 		return takeWhile(primes, i -> i <= candidateRoot)
 			.stream()
